@@ -1,0 +1,66 @@
+Cabal-Version:      3.0
+Name:               neural-network-example
+Version:            0.1.0
+Synopsis:           A simple feedforward neural network.
+Description:        This package provides a simple feedforward neural network,
+                    which can recognize handwritten digits from the MNIST
+                    database.
+License:            MIT
+License-File:       LICENSE
+Category:           Math
+Copyright:          2023 Enzo Haussecker
+Stability:          Experimental
+Author:             Enzo Haussecker
+Maintainer:         ehaussecker@protonmail.ch
+Build-Type:         Simple
+Extra-Source-Files: data/train-images-idx3-ubyte.gz
+                    data/train-labels-idx1-ubyte.gz
+                    data/t10k-images-idx3-ubyte.gz
+                    data/t10k-labels-idx1-ubyte.gz
+
+Common config
+    Build-Depends:
+        attoparsec,
+        base,
+        bytestring,
+        conduit,
+        conduit-extra,
+        convertible,
+        hmatrix,
+        random,
+        resourcet,
+        serialise,
+        vector
+    Default-Language:
+        GHC2021
+    GHC-Options:
+        -O2
+        -Wall
+        -rtsopts
+    HS-Source-Dirs:
+        src
+
+Executable train
+    Import:
+        config
+    Main-Is:
+        Train.hs
+    Other-Modules:
+        Conduit
+        Model
+        Types
+        Util
+
+Executable test
+    Import:
+        config
+    GHC-Options:
+        -- -DTRACE
+        -fno-warn-unused-imports
+    Main-Is:
+        Test.hs
+    Other-Modules:
+        Conduit
+        Model
+        Types
+        Util

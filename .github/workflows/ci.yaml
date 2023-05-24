@@ -1,0 +1,22 @@
+name: build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  neural-network-example:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: 'Install dependencies'
+        run: |
+          sudo apt-get install cabal-install
+          cabal update
+          cabal install --only-dependencies
+      - name: 'Build executables'
+        run: cabal build
+      - name: 'Train model'
+        run: cabal run train
+      - name: 'Test model'
+        run: cabal run test

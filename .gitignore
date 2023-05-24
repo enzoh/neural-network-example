@@ -1,0 +1,5 @@
+.DS_Store
+dist-newstyle/
+model.cbor
+train.hp
+train.svg
